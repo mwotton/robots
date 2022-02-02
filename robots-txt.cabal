@@ -2,15 +2,15 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 name:                robots-txt
-version:             0.4.1.5
+version:             0.4.1.6
 synopsis:            Parser for robots.txt
 description:         This is an attoparsec parser for robots.txt files
-homepage:            http://github.com/meanpath/robots
+homepage:            http://github.com/mwotton/robots
 license:             BSD3
 license-file:        LICENSE
 author:              Mark Wotton
 maintainer:          mwotton@gmail.com
-bug-reports:         https://github.com/meanpath/robots/issues
+bug-reports:         https://github.com/mwotton/robots/issues
 -- copyright:
 category:            Web
 build-type:          Simple
@@ -18,7 +18,7 @@ cabal-version:       >=1.8
 
 source-repository head
   type: git
-  location: git://github.com/meanpath/robots.git
+  location: git://github.com/mwotton/robots.git
 
 library
   exposed-modules:     Network.HTTP.Robots
@@ -27,7 +27,7 @@ library
   build-depends:        base >= 4 && <= 5
                       , bytestring
                       , attoparsec >= 0.12.1.6 && < 0.14
-                      , time >= 1.4 && < 1.9
+                      , time >= 1.4
                       , old-locale >= 1.0.0.5 && < 1.1
 
 test-suite tests
