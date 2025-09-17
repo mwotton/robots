@@ -2,7 +2,7 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 name:                robots-txt
-version:             0.4.1.8
+version:             0.4.1.9
 synopsis:            Parser for robots.txt
 description:         This is an attoparsec parser for robots.txt files
 homepage:            http://github.com/mwotton/robots
