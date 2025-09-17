@@ -7,6 +7,43 @@ on:
     branches: [ "**" ]
 
 jobs:
+  format:
+    name: Ormolu Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Haskell (cabal)
+        uses: haskell-actions/setup@v2
+        with:
+          ghc-version: '9.8.2'
+          cabal-version: '3.10.2.0'
+
+      - name: Cache cabal store
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cabal/store
+          key: ormolu-${{ runner.os }}-ghc-9.8.2-${{ hashFiles('**/*.cabal') }}-${{ hashFiles('cabal.project*') }}
+          restore-keys: |
+            ormolu-${{ runner.os }}-ghc-9.8.2-
+
+      - name: Install Ormolu
+        run: |
+          cabal update
+          cabal install ormolu
+
+      - name: Check formatting with Ormolu
+        run: |
+          set -euo pipefail
+          files=$(git ls-files '*.hs')
+          if [ -n "$files" ]; then
+            echo "$files" | xargs -n 50 ormolu --mode check --check-idempotence
+          else
+            echo "No .hs files to check"
+          fi
+
   cabal:
     name: Cabal (GHC 9.8.2)
     runs-on: ubuntu-latest
@@ -67,4 +104,3 @@ jobs:
 
       - name: Test
         run: stack test --no-terminal --fast
-
