@@ -18,16 +18,16 @@ cabal-version:       >=1.10
 
 source-repository head
   type: git
-  location: git://github.com/mwotton/robots.git
+  location: https://github.com/mwotton/robots.git
 
 library
   exposed-modules:     Network.HTTP.Robots
   -- other-modules:
   hs-source-dirs:         src
-  build-depends:        base >= 4 && <= 5
-                      , bytestring
+  build-depends:        base >= 4 && < 5
+                      , bytestring < 0.13
                       , attoparsec >= 0.12.1.6 && < 0.15
-                      , time >= 1.4
+                      , time >= 1.4 && < 1.13
                       , old-locale >= 1.0.0.5 && < 1.1
   default-language:    Haskell98
 
@@ -39,13 +39,15 @@ test-suite tests
   other-modules:   RegressionsSpec
                    RobotSpec
                    SmokeSpec
-  build-depends:   base >= 4 && <= 5
-                   , hspec
-                   , QuickCheck
-                   , bytestring
-                   , robots-txt
-                   , directory
-                   , transformers
-                   , attoparsec
-                   , heredoc
+  build-tool-depends:
+    hspec-discover:hspec-discover
+  build-depends:   base >= 4 && < 5
+                   , hspec < 3
+                   , QuickCheck < 3
+                   , bytestring < 0.13
+                   , robots-txt < 0.5
+                   , directory < 1.4
+                   , transformers < 0.7
+                   , attoparsec < 0.15
+                   , heredoc < 0.3
   default-language:    Haskell98
